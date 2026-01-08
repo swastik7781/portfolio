@@ -29,7 +29,7 @@ function ParticleSystem() {
       [0.54, 0, 1],      // violet
       [0, 1, 0.53],      // green
     ];
-    
+
     for (let i = 0; i < particleCount; i++) {
       const colorIndex = Math.floor(Math.random() * neonColors.length);
       const color = neonColors[colorIndex];
@@ -45,54 +45,33 @@ function ParticleSystem() {
     if (!particlesRef.current) return;
 
     const time = state.clock.getElapsedTime();
-    
+
     // Rotate particle system
     particlesRef.current.rotation.y = time * 0.05;
     particlesRef.current.rotation.x = Math.sin(time * 0.1) * 0.1;
 
     // Update particle positions based on mouse
     const positions = particlesRef.current.geometry.attributes.position.array as Float32Array;
-    
+
     for (let i = 0; i < particleCount; i++) {
       const i3 = i * 3;
-      
+
       // Wave motion
       positions[i3 + 1] += Math.sin(time + positions[i3]) * 0.001;
-      
+
       // Spiral motion
       const angle = time * 0.5 + i * 0.01;
       positions[i3] += Math.cos(angle) * 0.001;
       positions[i3 + 2] += Math.sin(angle) * 0.001;
     }
-    
+
     particlesRef.current.geometry.attributes.position.needsUpdate = true;
   });
-
-  return (
-    <points ref={particlesRef}>
-      <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          count={particleCount}
-          array={positions}
-          itemSize={3}
-        />
-        <bufferAttribute
-          attach="attributes-color"
-          count={particleCount}
-          array={colors}
-          itemSize={3}
-        />
-      </bufferGeometry>
-      <pointsMaterial
-        size={0.05}
-        vertexColors
-        transparent
-        opacity={0.8}
-        sizeAttenuation
-        blending={THREE.AdditiveBlending}
-      />
-    </points>
+  opacity = { 0.8}
+  sizeAttenuation
+  blending = { THREE.AdditiveBlending }
+    />
+    </points >
   );
 }
 
