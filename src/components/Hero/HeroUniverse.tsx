@@ -29,7 +29,6 @@ export default function HeroUniverse() {
             y: 0,
             transition: {
                 duration: 1,
-                ease: 'easeOut',
             },
         },
     };
@@ -42,7 +41,6 @@ export default function HeroUniverse() {
             transition: {
                 duration: 1,
                 delay: 0.5,
-                ease: 'easeOut',
             },
         },
     };
@@ -55,7 +53,6 @@ export default function HeroUniverse() {
             transition: {
                 duration: 0.5,
                 delay: 1 + i * 0.2,
-                ease: 'easeOut',
             },
         }),
         hover: {
