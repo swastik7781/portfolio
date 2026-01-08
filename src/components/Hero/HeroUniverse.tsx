@@ -72,7 +72,7 @@ export default function HeroUniverse() {
             {/* Background Effects */}
             <CyberGrid />
             <ParticleField />
-            <FloatingShapes count={25} />
+            <FloatingShapes />
             <KatanaBlade />
 
             {/* Main Content */}
