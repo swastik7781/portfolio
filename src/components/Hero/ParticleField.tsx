@@ -67,11 +67,28 @@ function ParticleSystem() {
 
     particlesRef.current.geometry.attributes.position.needsUpdate = true;
   });
-  opacity = { 0.8}
-  sizeAttenuation
-  blending = { THREE.AdditiveBlending }
-    />
-    </points >
+
+  return (
+    <points ref={particlesRef}>
+      <bufferGeometry>
+        <bufferAttribute
+          attach="attributes-position"
+          args={[positions, 3]}
+        />
+        <bufferAttribute
+          attach="attributes-color"
+          args={[colors, 3]}
+        />
+      </bufferGeometry>
+      <pointsMaterial
+        size={0.05}
+        vertexColors
+        transparent
+        opacity={0.8}
+        sizeAttenuation
+        blending={THREE.AdditiveBlending}
+      />
+    </points>
   );
 }
 
