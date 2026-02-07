@@ -5,7 +5,6 @@ import * as THREE from 'three';
 
 function ParticleSystem() {
   const particlesRef = useRef<THREE.Points>(null);
-  const mousePosition = useRef({ x: 0, y: 0 });
 
   // Create particle positions
   const particleCount = 10000;

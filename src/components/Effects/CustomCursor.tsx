@@ -57,7 +57,7 @@ export default function CustomCursor() {
 
             {/* Trail */}
             <AnimatePresence>
-                {trail.map((point, index) => (
+                {trail.map((point) => (
                     <motion.div
                         key={point.id}
                         className="absolute w-1 h-1 bg-cyan-400 rounded-full"

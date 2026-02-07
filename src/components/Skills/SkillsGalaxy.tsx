@@ -39,7 +39,6 @@ const categories = ['All', 'Frontend', 'Backend', 'Database', 'Languages', 'Tool
 
 export default function SkillsGalaxy() {
     const [selectedCategory, setSelectedCategory] = useState('All');
-    const [selectedSkill, setSelectedSkill] = useState<typeof skillsData[0] | null>(null);
     const [flippedCards, setFlippedCards] = useState<Set<string>>(new Set());
 
     const filteredSkills = selectedCategory === 'All'
@@ -109,8 +108,8 @@ export default function SkillsGalaxy() {
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             className={`px-6 py-3 rounded-xl font-bold transition-all ${selectedCategory === category
-                                    ? 'glass-strong border-2 border-cyan-400 text-cyan-400'
-                                    : 'glass border-2 border-gray-600 text-gray-400 hover:border-cyan-400/50'
+                                ? 'glass-strong border-2 border-cyan-400 text-cyan-400'
+                                : 'glass border-2 border-gray-600 text-gray-400 hover:border-cyan-400/50'
                                 }`}
                         >
                             {category}

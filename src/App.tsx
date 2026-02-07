@@ -10,7 +10,6 @@ import ContactPortal from '@/components/Contact/ContactPortal';
 import Navigation from '@/components/Layout/Navigation';
 import CustomCursor from '@/components/Effects/CustomCursor';
 import TerminalOverlay from '@/components/Effects/TerminalOverlay';
-import ThemeToggle from '@/components/Layout/ThemeToggle';
 import LoadingScreen from '@/components/Effects/LoadingScreen';
 import AnimatedCodeBackground from '@/components/Effects/AnimatedCodeBackground';
 import MobileMenu from '@/components/Layout/MobileMenu';
