@@ -25,8 +25,13 @@ export default function ContactPortal() {
             const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
             const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
+            // Validate environment variables
+            if (!serviceId || !templateId || !publicKey) {
+                throw new Error('EmailJS configuration missing. Please contact via email: swastikbhardwaj457@gmail.com');
+            }
+
             // Send email using EmailJS
-            await emailjs.send(
+            const response = await emailjs.send(
                 serviceId,
                 templateId,
                 {
@@ -39,16 +44,22 @@ export default function ContactPortal() {
                 publicKey
             );
 
+            console.log('EmailJS Success:', response);
+
             setIsSending(false);
             setSent(true);
             setFormData({ name: '', email: '', phone: '', message: '' });
 
             setTimeout(() => setSent(false), 3000);
-        } catch (err) {
+        } catch (err: any) {
             console.error('EmailJS Error:', err);
             setIsSending(false);
-            setError('Failed to send message. Please try again or email directly.');
-            setTimeout(() => setError(''), 5000);
+
+            // More detailed error message
+            const errorMessage = err.text || err.message || 'Failed to send message';
+            setError(`${errorMessage}. Please email directly: swastikbhardwaj457@gmail.com`);
+
+            setTimeout(() => setError(''), 8000);
         }
     };
 
