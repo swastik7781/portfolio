@@ -2,6 +2,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
+import { emailJsConfig } from '../../config/emailjs';
 
 export default function ContactPortal() {
     const [formData, setFormData] = useState({
@@ -20,16 +21,17 @@ export default function ContactPortal() {
         setError('');
 
         try {
-            // EmailJS configuration
-            const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-            const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-            const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+            // EmailJS configuration with fallback values
+            const serviceId = emailJsConfig.serviceId;
+            const templateId = emailJsConfig.templateId;
+            const publicKey = emailJsConfig.publicKey;
 
             // Debug: Log environment variable status (without exposing full values)
             console.log('Environment Check:', {
                 serviceId: serviceId ? `✓ Set (${serviceId.substring(0, 8)}...)` : '✗ Missing',
                 templateId: templateId ? `✓ Set (${templateId.substring(0, 8)}...)` : '✗ Missing',
                 publicKey: publicKey ? `✓ Set (${publicKey.substring(0, 5)}...)` : '✗ Missing',
+                source: import.meta.env.VITE_EMAILJS_SERVICE_ID ? 'Environment Variables' : 'Fallback Config',
                 allViteVars: Object.keys(import.meta.env).filter(key => key.startsWith('VITE_'))
             });
 
