@@ -25,9 +25,22 @@ export default function ContactPortal() {
             const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
             const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
+            // Debug: Log environment variable status (without exposing full values)
+            console.log('Environment Check:', {
+                serviceId: serviceId ? `✓ Set (${serviceId.substring(0, 8)}...)` : '✗ Missing',
+                templateId: templateId ? `✓ Set (${templateId.substring(0, 8)}...)` : '✗ Missing',
+                publicKey: publicKey ? `✓ Set (${publicKey.substring(0, 5)}...)` : '✗ Missing',
+                allViteVars: Object.keys(import.meta.env).filter(key => key.startsWith('VITE_'))
+            });
+
             // Validate environment variables
             if (!serviceId || !templateId || !publicKey) {
-                throw new Error('EmailJS configuration missing. Please contact via email: swastikbhardwaj457@gmail.com');
+                const missing = [];
+                if (!serviceId) missing.push('VITE_EMAILJS_SERVICE_ID');
+                if (!templateId) missing.push('VITE_EMAILJS_TEMPLATE_ID');
+                if (!publicKey) missing.push('VITE_EMAILJS_PUBLIC_KEY');
+
+                throw new Error(`EmailJS configuration missing: ${missing.join(', ')}. Please contact via email: swastikbhardwaj457@gmail.com`);
             }
 
             // Send email using EmailJS
@@ -53,6 +66,12 @@ export default function ContactPortal() {
             setTimeout(() => setSent(false), 3000);
         } catch (err: any) {
             console.error('EmailJS Error:', err);
+            console.error('Error details:', {
+                message: err.message,
+                text: err.text,
+                status: err.status,
+                name: err.name
+            });
             setIsSending(false);
 
             // More detailed error message
